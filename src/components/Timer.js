@@ -4,43 +4,44 @@ import Buttons from './Buttons';
 import { connect } from 'react-redux';
 import { LONG_BREAK_MODE, POMO_MODE, SHORT_BREAK_MODE } from '../actions/types';
 import { displayInitialPomo } from '../actions/timer';
+import { LONG_BREAK, POMODORO, SHORT_BREAK } from '../constants/constants';
 
 function Timer(props) {
   // displayTimeByMode Function
-  const displayInitialTimeByMode = (currentMode) => {
-    const initialSecond = `00`;
-
-    switch (currentMode) {
-      case POMO_MODE:
-        //   Format second to 2 digit
-        displayInitialPomo(`${pomodoroMins}:${initialSecond}`);
-        break;
-      case SHORT_BREAK_MODE:
-        displayInitialPomo(`${shortBreakMins}:${initialSecond}`);
-        break;
-      case LONG_BREAK_MODE:
-        displayInitialPomo(`${longBreakMins}:${initialSecond}`);
-        break;
-
-      default:
-        break;
-    }
-  };
 
   // take from props
   const {
-    timer: { displayTime, currentMode },
+    timer: { displayTimeDesc, displayTime, currentMode },
     durations: { pomodoroMins, shortBreakMins, longBreakMins },
     displayInitialPomo,
   } = props;
 
   useEffect(() => {
+    const displayInitialTimeByMode = (currentMode) => {
+      const initialSecond = `00`;
+
+      switch (currentMode) {
+        case POMO_MODE:
+          //   Format second to 2 digit
+          displayInitialPomo(POMODORO, `${pomodoroMins}:${initialSecond}`);
+          break;
+        case SHORT_BREAK_MODE:
+          displayInitialPomo(SHORT_BREAK, `${shortBreakMins}:${initialSecond}`);
+          break;
+        case LONG_BREAK_MODE:
+          displayInitialPomo(LONG_BREAK, `${longBreakMins}:${initialSecond}`);
+          break;
+
+        default:
+          break;
+      }
+    };
     displayInitialTimeByMode(currentMode);
-  }, [currentMode]);
+  }, [currentMode, displayInitialPomo]);
 
   return (
     <div className='timer gt'>
-      <h3 className='timer-desc'>Short Break</h3>
+      <h3 className='timer-desc'>{displayTimeDesc}</h3>
       <h3 className='display-time'>{displayTime}</h3>
       <img src={tomatoTimerImg} alt='Tomato Timer' />
       <Buttons />

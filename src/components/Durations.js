@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { setLongBreak, setPomodoro, setShortBreak } from '../actions/duration';
+import { updateMode } from '../actions/timer';
+import { LONG_BREAK_MODE, POMO_MODE, SHORT_BREAK_MODE } from '../actions/types';
 
 function Durations(props) {
   // Props
   const {
     durations: { pomodoroMins, shortBreakMins, longBreakMins },
+    updateMode,
     setPomodoro,
     setShortBreak,
     setLongBreak,
@@ -87,9 +90,27 @@ function Durations(props) {
         <button>Save</button>
       </form>
       <div className='timer-options'>
-        <button>Timer</button>
-        <button>Short Break</button>
-        <button>Long Break</button>
+        <button
+          onClick={() => {
+            updateMode(POMO_MODE);
+          }}
+        >
+          Timer
+        </button>
+        <button
+          onClick={() => {
+            updateMode(SHORT_BREAK_MODE);
+          }}
+        >
+          Short Break
+        </button>
+        <button
+          onClick={() => {
+            updateMode(LONG_BREAK_MODE);
+          }}
+        >
+          Long Break
+        </button>
       </div>
     </div>
   );
@@ -100,6 +121,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
+  updateMode,
   setPomodoro,
   setShortBreak,
   setLongBreak,

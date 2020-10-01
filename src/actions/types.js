@@ -5,6 +5,10 @@ export const SET_POMO = 'SET_POMO';
 export const SET_SHORT_BREAK = 'SET_SHORT_BREAK';
 export const SET_LONG_BREAK = 'SET_LONG_BREAK';
 export const DISPLAY_POMO_INITIAL = 'DISPLAY_POMO_INITIAL';
+export const SET_REMAINING_TIME = 'SET_REMAINING_TIME';
+export const PAUSE_POMO = 'PAUSE_POMO';
+// Mode actions
+export const UPDATE_MODE = 'UPDATE_MODE';
 
 // Modes
 export const POMO_MODE = 'POMO_MODE';

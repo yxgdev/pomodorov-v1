@@ -1,4 +1,10 @@
-import { DISPLAY_POMO_INITIAL, START_POMO } from './types';
+import {
+  DISPLAY_POMO_INITIAL,
+  PAUSE_POMO,
+  SET_REMAINING_TIME,
+  START_POMO,
+  UPDATE_MODE,
+} from './types';
 
 // export const updateTimer = (displayTime) => (dispatch) => {
 //   // some timer stuff
@@ -11,7 +17,22 @@ export const updateTimer = (displayTime) => ({
   payload: displayTime,
 });
 
-export const displayInitialPomo = (displayTime) => ({
+export const displayInitialPomo = (displayTimeDesc, displayTime) => ({
   type: DISPLAY_POMO_INITIAL,
-  payload: displayTime,
+  payload: { displayTimeDesc, displayTime },
+});
+
+export const updateMode = (newMode) => ({
+  type: UPDATE_MODE,
+  payload: newMode,
+});
+
+export const setRemainingTime = (newMin, newSec) => ({
+  type: SET_REMAINING_TIME,
+  payload: { newMin, newSec },
+});
+
+export const setTimerStatus = (paused) => ({
+  type: PAUSE_POMO,
+  payload: !paused,
 });

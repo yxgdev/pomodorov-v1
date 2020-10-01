@@ -1,38 +1,200 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
+
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #faedca;
+  font-family: 'Amatic SC', cursive;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
+
+body {
+  background-color: #faedca;
+  font-family: 'Amatic SC', cursive;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 85%;
+  height: 95vh;
+  margin: 0 auto;
+}
+
+/* header */
+
+header a {
+  display: flex;
+  align-items: center;
+  padding: 0.3rem;
+}
+header img {
+  display: inline-block;
+  width: 6rem;
+  height: 4rem;
+}
+/* main will be grid */
+
+main.contents {
+  display: grid;
+  padding: 1.2rem 0;
+  align-items: center;
+  grid-template-columns: 1fr 2fr 1fr;
+  height: 75vh;
+}
+
+/* durations(left side) */
+
+.gt {
+  color: #707070;
+}
+
+.gb {
+  border: 1px solid #707070;
+}
+
+/* <----(1) Duration ----> */
+
+.durations {
+  /* border: 1px solid grey; */
+}
+.durations h2 {
+  margin: 1rem 0;
+  font-size: 2rem;
+}
+
+/* Duration */
+.timer-options {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.timer-options button {
+  font-family: 'Amatic SC';
+  font-size: 1.5rem;
+  background-color: #f88f4f;
+  color: white;
+  border: none;
+  display: inline-block;
+  padding: 1rem;
+  margin: 1rem 0;
+  cursor: pointer;
+  outline: none;
+}
+.timer-options button:hover {
+  transform: scale(1.1);
+}
+.durations h2 {
+  font-size: 3rem;
+}
+.duration-form label {
+  font-size: 1.5rem;
+}
+/* Durations form */
+input {
+  display: block;
+  margin: 0.15rem 0;
+}
+
+/* <---- (2) Display Time & Tomato Time ---->*/
+
+/* img smaller */
+
+.timer-desc {
+  font-size: 4.5rem;
+  margin: 0;
+}
+.timer img {
+  width: 15rem;
+  height: 12rem;
+}
+
+/* timer  */
+.timer {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.display-time {
+  margin: 0;
+  font-size: 5rem;
+  font-weight: 400;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* buttons */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+  margin: 0 auto;
+  padding: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.button {
+  font-family: 'Amatic SC', cursive;
+  border: 1px solid #707070;
+  width: 35%;
+  display: inline-block;
+  padding: 5px;
+  color: white;
+  font-size: 1.5rem;
+}
+.button:hover {
+  transform: scale(1.1);
+}
+.stop-button {
+  background-color: #f2c078;
+}
+.start-button {
+  background-color: #7ebc89;
+}
+
+/* <----(3) Today Timer ----> */
+.today-timer {
+  background-color: #f6d7a1;
+  border: 1rem solid #f2c078;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  height: 85%;
+}
+/* heading of today timer */
+.today-timer h2 {
+  font-size: 3rem;
+  margin: 0;
+  font-weight: bold;
+}
+.today-timer h3 {
+  font-size: 1.3rem;
+  margin: 0;
 }
 
-.App-link {
-  color: #61dafb;
+/* the very big number */
+.total-timer {
+  font-size: 10rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+footer {
+  text-align: center;
+  background-color: #f4cc8d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 5vh;
+}
+
+footer p {
+  color: black;
+  font-size: 1rem;
+  display: block;
+  margin: 0;
 }

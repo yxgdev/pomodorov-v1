@@ -7,6 +7,8 @@ import {
 } from '../actions/timer';
 
 function Buttons({
+  startTimer,
+  stopTimer,
   updateTimer,
   setRemainingTime,
   setTimerStatus,
@@ -15,70 +17,75 @@ function Buttons({
   timer: { remainingMin, remainingSec, paused },
 }) {
   // add a new variable here
-  let runningTimer;
 
-  const intervalFunction = (min, sec) => {
-    let displayTime = '';
+  // var randomInterval;
 
-    if (min !== 0 && sec === 0) {
-      //   reset second if minute not finished
-      sec = 60;
-      min--;
-    }
+  // const randomFunction = () => {
+  //   randomInterval = setInterval(() => {
+  //     console.log('hi');
+  //   }, 1000);
+  // };
 
-    sec--;
+  // const stopFunction = () => {
+  //   clearInterval(randomInterval);
+  // };
 
-    // console.log(sec);
+  var randomInterval;
 
-    //   Format second to 2 digit
-    let formattedSecond = ('0' + sec).slice(-2);
-    //   change content of displayTime
-
-    // displayTime.innerText = `${min}:${formattedSecond}`;
-    displayTime = `${min}:${formattedSecond}`;
-    updateTimer(displayTime);
-    setRemainingTime(min, sec);
-    console.log(paused, 'wtf');
-    if (min === 0 && sec === 0) {
-      //   Check if timer finished
-      console.log('Here?');
-      clearInterval(runningTimer);
-      // something equals to true
-    }
-
-    // setTimeout(() => {
-    //   clearInterval(runningTimer);
-    // }, 5000);
-  };
-  const startTimer = (min, sec) => {
-    // const displayTime = document.querySelector('.display-time');
-    // console.log(displayTime);
-    if (min > 0 || sec > 0) {
-      runningTimer = setInterval(() => {
-        intervalFunction(min, sec);
-      }, 1000);
-    }
+  const randomFunction = () => {
+    randomInterval = setInterval(() => {
+      console.log('hi');
+      updateTimer(20);
+    }, 1000);
   };
 
-  const stopTimer = () => {
-    console.log(runningTimer);
-    clearInterval(runningTimer);
+  const stopFunction = () => {
+    clearInterval(randomInterval);
   };
+
+  // function stopTimer() {
+  //   clearInterval(runningTimer);
+  // }
   // Component
+
+  //
+  //   <button
+  //   className='stop-button button'
+  //   onClick={() => {
+  //     stopFunction();
+  //   }}
+  // >
+  //   STOP
+  // </button>
+  // <button
+  //   className='start-button button'
+  //   onClick={() => {
+  //     randomFunction();
+  //   }}
+  // >
   return (
     <div className='buttons'>
-      <button className='stop-button button' onClick={stopTimer}>
+      <button
+        className='stop-button button'
+        onClick={() => {
+          // stopTimer(remainingMin, remainingSec);
+          // stopFunction();
+          stopTimer();
+          console.log('why');
+        }}
+      >
         STOP
       </button>
       <button
         className='start-button button'
         onClick={() => {
           startTimer(remainingMin, remainingSec);
+          // randomFunction();
         }}
       >
         Start
       </button>
-      <button onClick={() => {}}>Check pause</button>
+      <button>Check pause</button>
     </div>
   );
 }
@@ -90,3 +97,27 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = { updateTimer, setRemainingTime, setTimerStatus };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Buttons);
+
+// const startTimer = (min, sec) => {
+//   let displayTime = '';
+
+//   if (min > 0 || sec > 0) {
+//     runningTimer = setInterval(() => {
+//       if (min !== 0 && sec === 0) {
+//         sec = 60;
+//         min--;
+//       }
+//       sec--;
+//       let formattedSecond = ('0' + sec).slice(-2);
+//       displayTime = `${min}:${formattedSecond}`;
+//       updateTimer(displayTime);
+//       setRemainingTime(min, sec);
+//       if (min === 0 && sec === 0) {
+//         clearInterval(runningTimer);
+//       }
+//     }, 1000);
+//   }
+// };
+// const stopTimer = () => {
+//   clearInterval(runningTimer);
+// };

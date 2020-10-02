@@ -10,7 +10,7 @@ import {
 
 const initialState = {
   displayTimeDesc: 'POMODORO',
-  displayTime: '30:00',
+  displayTime: '25:00',
   currentMode: POMO_MODE,
   remainingMin: 25,
   remainingSec: 0,

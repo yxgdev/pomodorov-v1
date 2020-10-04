@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.369fc760.chunk.css",
+    "main.js": "/static/js/main.e679ae3c.chunk.js",
+    "main.js.map": "/static/js/main.e679ae3c.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.acf68ccc.js",
+    "runtime-main.js.map": "/static/js/runtime-main.acf68ccc.js.map",
+    "static/js/2.491255c5.chunk.js": "/static/js/2.491255c5.chunk.js",
+    "static/js/2.491255c5.chunk.js.map": "/static/js/2.491255c5.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.2a618c1bf522b60e0ebf668b61841bb6.js": "/precache-manifest.2a618c1bf522b60e0ebf668b61841bb6.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.369fc760.chunk.css.map": "/static/css/main.369fc760.chunk.css.map",
+    "static/js/2.491255c5.chunk.js.LICENSE.txt": "/static/js/2.491255c5.chunk.js.LICENSE.txt",
+    "static/media/TomatoTimer.png": "/static/media/TomatoTimer.fadd6c36.png",
+    "static/media/old-clock.wav": "/static/media/old-clock.e4ea3107.wav"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.acf68ccc.js",
+    "static/js/2.491255c5.chunk.js",
+    "static/css/main.369fc760.chunk.css",
+    "static/js/main.e679ae3c.chunk.js"
+  ]
+}

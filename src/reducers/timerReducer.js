@@ -2,10 +2,13 @@ import {
   DISPLAY_POMO_INITIAL,
   POMO_MODE,
   SET_REMAINING_TIME,
-  SET_TIMER_STATUS,
   START_POMO,
   PAUSE_POMO,
   UPDATE_MODE,
+  START_TIMER,
+  STOP_TIMER,
+  STOP_TIMER_AND_UPDATE_DISPLAY,
+  INCREMENT_TODAY_TIMER,
 } from '../actions/types';
 
 const initialState = {
@@ -15,6 +18,8 @@ const initialState = {
   remainingMin: 25,
   remainingSec: 0,
   paused: true,
+  delay: null,
+  todayTimerCount: 0,
 };
 
 const timerReducer = (state = initialState, action) => {
@@ -39,6 +44,20 @@ const timerReducer = (state = initialState, action) => {
 
     case PAUSE_POMO:
       return { ...state, paused: true };
+    case START_TIMER:
+      // payload is delay
+      return { ...state, delay: payload };
+    case STOP_TIMER:
+      // payload is delay
+      return { ...state, delay: payload };
+    case STOP_TIMER_AND_UPDATE_DISPLAY:
+      return {
+        ...state,
+        displayTime: payload.displayTime,
+        delay: payload.delay,
+      };
+    case INCREMENT_TODAY_TIMER:
+      return { ...state, todayTimerCount: payload };
 
     default:
       return state;

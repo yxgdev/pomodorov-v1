@@ -1,68 +1,52 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import {
+  incrementTodayTimerCount,
   setRemainingTime,
   setTimerStatus,
-  updateTimer,
-} from '../actions/timer';
-
-function Buttons({
   startTimer,
   stopTimer,
   updateTimer,
-  setRemainingTime,
-  setTimerStatus,
+} from '../actions/timer';
+import { POMO_MODE } from '../actions/types';
+import playAudio from './essentialFunctions';
 
-  durations: { pomodoroMins, shortBreakMins, longBreakMins },
-  timer: { remainingMin, remainingSec, paused },
-}) {
-  // add a new variable here
+function Buttons(props) {
+  const {
+    startTimer,
+    stopTimer,
+    updateTimer,
+    setRemainingTime,
+    incrementTodayTimerCount,
 
-  // var randomInterval;
+    timer: { remainingMin, remainingSec, delay, todayTimerCount, currentMode },
+  } = props;
 
-  // const randomFunction = () => {
-  //   randomInterval = setInterval(() => {
-  //     console.log('hi');
-  //   }, 1000);
-  // };
+  useInterval((min = remainingMin, sec = remainingSec) => {
+    console.log('wtf');
 
-  // const stopFunction = () => {
-  //   clearInterval(randomInterval);
-  // };
+    if (min > 0 || sec > 0) {
+      if (min !== 0 && sec === 0) {
+        sec = 60;
+        min--;
+      }
+      sec--;
+      let formattedSecond = ('0' + sec).slice(-2);
 
-  var randomInterval;
+      updateTimer(`${min}:${formattedSecond}`);
+      setRemainingTime(min, sec);
+      if (min === 0 && sec === 0) {
+        console.log('play audio');
+        playAudio();
+        if (currentMode === POMO_MODE) {
+          incrementTodayTimerCount(todayTimerCount);
+        }
+        // clearInterval(runningTimer);
+      }
+    }
+  }, delay);
 
-  const randomFunction = () => {
-    randomInterval = setInterval(() => {
-      console.log('hi');
-      updateTimer(20);
-    }, 1000);
-  };
-
-  const stopFunction = () => {
-    clearInterval(randomInterval);
-  };
-
-  // function stopTimer() {
-  //   clearInterval(runningTimer);
-  // }
-  // Component
-
-  //
-  //   <button
-  //   className='stop-button button'
-  //   onClick={() => {
-  //     stopFunction();
-  //   }}
-  // >
-  //   STOP
-  // </button>
-  // <button
-  //   className='start-button button'
-  //   onClick={() => {
-  //     randomFunction();
-  //   }}
-  // >
+  // Use interval function
   return (
     <div className='buttons'>
       <button
@@ -71,7 +55,6 @@ function Buttons({
           // stopTimer(remainingMin, remainingSec);
           // stopFunction();
           stopTimer();
-          console.log('why');
         }}
       >
         STOP
@@ -79,13 +62,11 @@ function Buttons({
       <button
         className='start-button button'
         onClick={() => {
-          startTimer(remainingMin, remainingSec);
-          // randomFunction();
+          startTimer();
         }}
       >
         Start
       </button>
-      <button>Check pause</button>
     </div>
   );
 }
@@ -94,30 +75,35 @@ const mapStateToProps = (state) => ({
   timer: state.timer,
 });
 
-const mapDispatchToProps = { updateTimer, setRemainingTime, setTimerStatus };
+const mapDispatchToProps = {
+  updateTimer,
+  setRemainingTime,
+  setTimerStatus,
+  startTimer,
+  stopTimer,
+  incrementTodayTimerCount,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Buttons);
 
-// const startTimer = (min, sec) => {
-//   let displayTime = '';
+function useInterval(callback, delay) {
+  const savedCallback = useRef();
+  // Remember the latest callback
+  useEffect(() => {
+    console.log('UseInterval useEffect');
+    savedCallback.current = callback;
+  }, [callback]);
 
-//   if (min > 0 || sec > 0) {
-//     runningTimer = setInterval(() => {
-//       if (min !== 0 && sec === 0) {
-//         sec = 60;
-//         min--;
-//       }
-//       sec--;
-//       let formattedSecond = ('0' + sec).slice(-2);
-//       displayTime = `${min}:${formattedSecond}`;
-//       updateTimer(displayTime);
-//       setRemainingTime(min, sec);
-//       if (min === 0 && sec === 0) {
-//         clearInterval(runningTimer);
-//       }
-//     }, 1000);
-//   }
-// };
-// const stopTimer = () => {
-//   clearInterval(runningTimer);
-// };
+  // Set up the interval
+  useEffect(() => {
+    function tick() {
+      console.log('funciton tick');
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      console.log('inside the if');
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+}

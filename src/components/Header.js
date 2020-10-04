@@ -5,7 +5,7 @@ import tomatoTimerImg from '../img/TomatoTimer.png';
 function Header() {
   return (
     <header>
-      <Link to=''>
+      <Link to='/'>
         <img src={tomatoTimerImg} alt='' />
         <h1>Pomodoro V1</h1>
       </Link>
